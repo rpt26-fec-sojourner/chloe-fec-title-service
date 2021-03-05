@@ -13,18 +13,17 @@ app.use(bodyParser.json());
 
 app.get('/get', (req, res) => {
   console.log('hello');
-  dbHelper.createTitle(
+  var newTitle =
     {
-      titleId: 1,
+      titleID: 1,
       listingID: 10,
       listingName: 'Spaceship',
       listingLocation: 'Mars'
-    });
+    };
 
-  dbHelper.findAllTitles()
-    .catch((err) => {
-      console.err('findAllTitles err: ', err);
-    });
+  dbHelper.createTitle(newTitle);
+
+  dbHelper.findAllTitles();
 });
 
 app.listen(port, () => {
