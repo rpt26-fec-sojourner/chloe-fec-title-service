@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/get', (req, res) => {
-  console.log('hello');
   var newTitle =
     {
       titleID: 1,
