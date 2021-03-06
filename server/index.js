@@ -15,9 +15,6 @@ app.use(bodyParser.json());
 app.get('/title/:listing_id', (req, res) => {
   dbHelper.findTitleInfo(req.params.listing_id)
     .then((result) => {
-      // let response = {
-
-      // }
       res.send({
         listingID: result.listingID,
         listingName: result.listingName,
