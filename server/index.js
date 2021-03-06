@@ -12,11 +12,21 @@ app.use(express.static(`${clientDist}`));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get('/get', (req, res) => {
-  dbHelper.deleteAllTitles();
-  seeder.seedDatabase();
+app.get('/title/:listing_id', (req, res) => {
+  dbHelper.findTitleInfo(req.params.listing_id)
+    .then((result) => {
+      // let response = {
 
-  dbHelper.findAllTitles();
+      // }
+      res.send({
+        listingID: result.listingID,
+        listingName: result.listingName,
+        listingLocation: result.listingLocation
+      });
+    })
+    .catch((err) => {
+      console.log('Error invoking findTitleInfo: ', err);
+    });
 });
 
 app.listen(port, () => {

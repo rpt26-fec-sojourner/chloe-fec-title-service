@@ -83,7 +83,7 @@ const seedDatabase = () => {
   let location = '';
   let usedNames = [];
 
-  while (id <= 101) {
+  while (id <= 100) {
     name = generateTitleName(usedNames);
     usedNames.push(name);
     location = generateTitleLocation();
