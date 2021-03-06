@@ -1,50 +1,5 @@
 const dbHelper = require(__dirname + '/../database/config.js');
-
-/*
-
-Title name:
-  Adjective + Noun
-
-  Adjectives:
-    Astronomical
-    Celestial
-    Cosmic
-    Extraterrestrial
-    Galactic
-    Intergalactic
-    Interstellar
-    Lunar
-    Martian
-    Planetary
-    Solar
-    Stellar
-
-  Nouns:
-    Rocket
-    Rocketship
-    Spaceship
-    UFO
-    Satellite
-    Space Capsule
-    Space Shuttle
-    Spacecraft
-    Flying Saucer
-
-Locations:
-  Original: City, State, Country
-  FEC: Lorem Ipsum, Lorem Ipsum, Planets/Space Locations
-
-  Planets/Space Locations:
-    Earth
-    Mars
-    Jupiter
-    Neptune
-    Mercury
-    Saturn
-    Uranus
-    Venus
-    Moon
-*/
+const faker = require('faker');
 
 let spaceAdjectives = [
   'Astronomical',
@@ -73,6 +28,18 @@ let spaceNouns = [
   'Flying Saucer'
 ];
 
+let spaceLocations = [
+  'Earth',
+  'Mars',
+  'Jupiter',
+  'Neptune',
+  'Mercury',
+  'Saturn',
+  'Uranus',
+  'Venus',
+  'Moon'
+];
+
 const generateAdj = () => {
   var adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
 
@@ -85,24 +52,55 @@ const generateNoun = () => {
   return spaceNouns[nounIndex];
 };
 
-const generateTitleName = () => {
-  var adj = generateAdj();
-  var noun = generateNoun();
+const generateTitleName = (usedNames) => {
+  let adj = generateAdj();
+  let noun = generateNoun();
+  let name = `The ${adj} ${noun}`;
 
-  return `The ${adj} ${noun}`;
+  if (usedNames.includes(name)) {
+    while (usedNames.includes(name)) {
+      adj = generateAdj();
+      noun = generateNoun();
+      name = `The ${adj} ${noun}`;
+    }
+  }
+
+  return name;
 };
 
-//Function to find latest title ID in mongodb - is there easy way to do this? google!
+const generateTitleLocation = () => {
+  let city = faker.address.city();
+  let state = faker.address.state();
+  let ctryIndex = Math.floor(Math.random() * spaceLocations.length);
+  let country = spaceLocations[ctryIndex];
+
+  return `${city}, ${state}, ${country}`;
+};
 
 const seedDatabase = () => {
-  //One Hundred Times loop (listingID 1 to 100):
-  //Use generateTitleName to get a random name
-  //Use generateLocation to get a random location
-  //Put the random name and location into this object:
-  var newTitle = {
-    titleID: 0,
-    listingID: 0,
-    listingName: name,
-    listingLocation: location
-  };
+  let id = 1;
+  let name = '';
+  let location = '';
+  let usedNames = [];
+
+  while (id <= 101) {
+    name = generateTitleName(usedNames);
+    usedNames.push(name);
+    location = generateTitleLocation();
+
+    let newTitle = {
+      listingID: id,
+      listingName: name,
+      listingLocation: location
+    };
+
+    dbHelper.createTitle(newTitle);
+    id++;
+  }
 };
+
+module.exports.generateAdj = generateAdj;
+module.exports.generateNoun = generateNoun;
+module.exports.generateTitleName = generateTitleName;
+module.exports.generateTitleLocation = generateTitleLocation;
+module.exports.seedDatabase = seedDatabase;
