@@ -57,12 +57,13 @@ class App extends React.Component {
 
   render () {
     return (
-      <Router>
-        <Route path="/title/:listing_id">
-          <Name />
-          <Location />
-        </Route>
-      </Router>
+      // <Router>
+      //   <Route path="/title/:listing_id">
+      //     <Name />
+      //     <Location />
+      //   </Route>
+      // </Router>
+      <Name name={this.state.listingName}/>
     );
   }
 }
