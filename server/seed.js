@@ -41,13 +41,13 @@ let spaceLocations = [
 ];
 
 const generateAdj = () => {
-  var adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
+  let adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
 
   return spaceAdjectives[adjIndex];
 };
 
 const generateNoun = () => {
-  var nounIndex = Math.floor(Math.random() * spaceNouns.length);
+  let nounIndex = Math.floor(Math.random() * spaceNouns.length);
 
   return spaceNouns[nounIndex];
 };
