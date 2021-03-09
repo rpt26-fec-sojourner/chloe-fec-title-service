@@ -1,13 +1,12 @@
-# Project Name
+# AirBnB Title Service
 
-> Project description
+> The title service is responsible for storing and displaying the name and location of the AirBnB listing. It will also call on the Reviews service to get information needed for the header (number of reviews + stars).
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/rpt26-fec-sojourner/carolyn-photos-service
+  - https://github.com/rpt26-fec-sojourner/jrudio-description-service
+  - https://github.com/rpt26-fec-sojourner/melanie-reviews-service
 
 ## Table of Contents
 
@@ -36,4 +35,3 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
-
