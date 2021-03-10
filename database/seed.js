@@ -41,13 +41,13 @@ let spaceLocations = [
 ];
 
 const generateAdj = () => {
-  let adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
+  var adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
 
   return spaceAdjectives[adjIndex];
 };
 
 const generateNoun = () => {
-  let nounIndex = Math.floor(Math.random() * spaceNouns.length);
+  var nounIndex = Math.floor(Math.random() * spaceNouns.length);
 
   return spaceNouns[nounIndex];
 };
@@ -83,6 +83,8 @@ const seedDatabase = () => {
   let location = '';
   let usedNames = [];
 
+  dbHelper.deleteAllTitles();
+
   while (id <= 100) {
     name = generateTitleName(usedNames);
     usedNames.push(name);
@@ -98,6 +100,8 @@ const seedDatabase = () => {
     id++;
   }
 };
+
+seedDatabase();
 
 module.exports.generateAdj = generateAdj;
 module.exports.generateNoun = generateNoun;

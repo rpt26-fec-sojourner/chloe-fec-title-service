@@ -9,21 +9,29 @@
   },
   "scripts": {
     "react-dev": "webpack --watch",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "^7.13.8",
+    "@babel/plugin-syntax-jsx": "^7.12.13",
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
+    "axios": "^0.21.1",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^5.4.0",
+    "jest": "^26.6.3",
     "jquery": "^3.6.0",
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.18",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-test-renderer": "^17.0.1",
     "webpack": "^5.24.3"
   },
   "devDependencies": {
