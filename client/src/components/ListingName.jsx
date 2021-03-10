@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Name = (props) => {
+  // const [name, setName] = useState('Chloe');
+  console.log('url: ', window.location.href);
+  console.log('props history: ', props.history);
 
   // useEffect(() => {
   //   fetch('/title/:listing_id')

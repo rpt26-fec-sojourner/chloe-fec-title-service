@@ -19,10 +19,17 @@ class App extends React.Component {
 
     this.generateTitle = this.generateTitle.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
   }
 
+
   componentDidMount () {
-    // this.generateTitle(this.state.listingID);
+    this.setState({listingID: 10});
+    // alert('hello');
+  }
+
+  componentWillUnmount() {
+    this.setState({listingID: 10});
   }
 
   generateTitle (id) {
@@ -55,6 +62,15 @@ class App extends React.Component {
     // axios.get()
   }
 
+  example() {
+    console.log('window.location.pathname : ', window.location.pathname );
+    if (window.location.pathname === '/') {
+      return 'chloe';
+    } else {
+      return 'tan';
+    }
+  }
+
   render () {
     return (
       // <Router>
@@ -63,7 +79,10 @@ class App extends React.Component {
       //     <Location />
       //   </Route>
       // </Router>
-      <Name name={this.state.listingName}/>
+      <div>
+        <Name name={this.example()}/>
+      </div>
+      // <div>{this.state.listingID}</div>
     );
   }
 }
