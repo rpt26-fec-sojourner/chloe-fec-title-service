@@ -1,23 +1,24 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const model = require('../models/titleModel');
-const clientDist = path.join(__dirname, '/../client/dist');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const ReactDOMServer = require('react-dom/server');
+import express from 'express';
+import bodyParser from 'body-parser';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import model from '../models/titleModel.js';
+import mongoose from 'mongoose';
 
 const app = express();
 const port = 3000;
+const _filename = fileURLToPath(import.meta.url);
+const _currdir = path.dirname(_filename);
+const _distdir = path.join(path.dirname(_currdir), 'client/dist');
 
-// app.use(cors());
-app.use(express.static(`${clientDist}`));
+console.log('meta: ', _distdir);
+
+app.use(express.static(_distdir));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost/title', {useNewUrlParser: true, useUnifiedTopology: true});
 
-// app.use('/', require('../routes/listingRoute'));
 app.get('/title/:listing_id', (req, res) => {
   let listingID = req.params.listing_id;
   model.findTitleInfo(listingID)

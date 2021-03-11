@@ -1,4 +1,5 @@
 //Could not figure out how to import modules with webpack/jest so I just copied the functions from seed.js.
+import seeder from './database/seed.js';
 
 let spaceAdjectives = [
   'Astronomical',
@@ -40,36 +41,36 @@ let spaceLocations = [
 ];
 
 
-const generateAdj = () => {
-  var adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
+// const generateAdj = () => {
+//   var adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
 
-  return spaceAdjectives[adjIndex];
-};
+//   return spaceAdjectives[adjIndex];
+// };
 
-const generateNoun = () => {
-  var nounIndex = Math.floor(Math.random() * spaceNouns.length);
+// const generateNoun = () => {
+//   var nounIndex = Math.floor(Math.random() * spaceNouns.length);
 
-  return spaceNouns[nounIndex];
-};
+//   return spaceNouns[nounIndex];
+// };
 
-const generateTitleName = (usedNames) => {
-  let adj = generateAdj();
-  let noun = generateNoun();
-  let name = `The ${adj} ${noun}`;
+// const generateTitleName = (usedNames) => {
+//   let adj = generateAdj();
+//   let noun = generateNoun();
+//   let name = `The ${adj} ${noun}`;
 
-  if (usedNames.includes(name)) {
-    while (usedNames.includes(name)) {
-      adj = generateAdj();
-      noun = generateNoun();
-      name = `The ${adj} ${noun}`;
-    }
-  }
+//   if (usedNames.includes(name)) {
+//     while (usedNames.includes(name)) {
+//       adj = generateAdj();
+//       noun = generateNoun();
+//       name = `The ${adj} ${noun}`;
+//     }
+//   }
 
-  return name;
-};
+//   return name;
+// };
 
 test('generateAdj returns a word from the spaceAdjectives array', () => {
-  let inArray = spaceAdjectives.includes(generateAdj());
+  let inArray = spaceAdjectives.includes(seedHelpers.generateAdj());
 
   expect(inArray).toBe(true);
 
