@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
 import $ from 'jquery';
 const ajaxURL = 'http://localhost:3000';
 import axios from 'axios';
