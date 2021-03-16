@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-// import $ from 'jquery';
 const ajaxURL = 'http://localhost:3000';
 import Name from '../src/components/ListingName.jsx';
 import Location from '../src/components/ListingLocation.jsx';
@@ -32,7 +31,11 @@ class App extends React.Component {
       console.log('id: ', id);
       axios.get(`${ajaxURL}/title/${id}`)
         .then((response) => {
-          console.log('response: ', response);
+          this.setState({
+            listingID: id,
+            listingName: response.data.listingName,
+            listingLocation: response.data.listingLocation
+          });
         })
         .catch((err) => {
           console.log('GET response error: ', err);
@@ -45,7 +48,8 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Name name={this.example()}/>
+        <Name name={this.state.listingName}/>
+        <Location location={this.state.listingLocation} />
       </div>
     );
   }
