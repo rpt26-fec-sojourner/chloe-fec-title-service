@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+// import $ from 'jquery';
 const ajaxURL = 'http://localhost:3000';
-import axios from 'axios';
 import Name from '../src/components/ListingName.jsx';
 import Location from '../src/components/ListingLocation.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,70 +18,35 @@ class App extends React.Component {
 
     this.generateTitle = this.generateTitle.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-    this.componentWillUnmount = this.componentWillUnmount.bind(this);
   }
-
 
   componentDidMount () {
-    this.setState({listingID: 10});
-    // alert('hello');
-  }
+    let splitUrl = window.location.href.split('/');
+    let id = splitUrl[splitUrl.length - 1];
 
-  componentWillUnmount() {
-    this.setState({listingID: 10});
+    this.generateTitle(id);
   }
 
   generateTitle (id) {
-
-    // useEffect(() => {
-    //   fetch('/title/:listing_id')
-    //     .then((res) => {
-    //       if (res.ok) {
-    //         console.log('res: ', res);
-    //         // return res.json();
-    //       }
-    //     })
-    //     .then((data) => {
-    //       console.log('data: ', data);
-    //     });
-    // });
-
-    // $.ajax({
-    //   type: 'GET',
-    //   url: `${ajaxURL}/title/${id}`,
-    //   success: (res) => {
-    //     console.log('Successful GET response: ', res);
-    //     this.setState({listingName: res.listingName, listingLocation: res.listingLocation});
-    //   },
-    //   error: (err) => {
-    //     console.log('GET response error: ', err);
-    //   }
-    // });
-
-    // axios.get()
-  }
-
-  example() {
-    console.log('window.location.pathname : ', window.location.pathname );
-    if (window.location.pathname === '/') {
-      return 'chloe';
+    if (id) {
+      console.log('id: ', id);
+      axios.get(`${ajaxURL}/title/${id}`)
+        .then((response) => {
+          console.log('response: ', response);
+        })
+        .catch((err) => {
+          console.log('GET response error: ', err);
+        });
     } else {
-      return 'tan';
+      this.setState({listingID: 1});
     }
   }
 
   render () {
     return (
-      // <Router>
-      //   <Route path="/title/:listing_id">
-      //     <Name />
-      //     <Location />
-      //   </Route>
-      // </Router>
       <div>
         <Name name={this.example()}/>
       </div>
-      // <div>{this.state.listingID}</div>
     );
   }
 }

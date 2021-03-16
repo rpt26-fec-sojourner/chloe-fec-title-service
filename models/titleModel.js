@@ -67,5 +67,4 @@ Title.findTitleInfo = (id) => {
     });
 };
 
-// export default Title;
-module.exports.Title = Title;
+module.exports = Title;
