@@ -1,17 +1,12 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import model from '../models/titleModel.js';
-import mongoose from 'mongoose';
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const model = require('../models/titleModel.js');
+const mongoose = require('mongoose');
 
 const app = express();
 const port = 3000;
-const _filename = fileURLToPath(import.meta.url);
-const _currdir = path.dirname(_filename);
-const _distdir = path.join(path.dirname(_currdir), 'client/dist');
-
-console.log('meta: ', _distdir);
+const _distdir = path.join(__dirname, 'client/dist');
 
 app.use(express.static(_distdir));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -23,17 +18,20 @@ app.get('/title/:listing_id', (req, res) => {
   let listingID = req.params.listing_id;
   model.findTitleInfo(listingID)
     .then((data) => {
-      const html =
-        `<html>
-          <body>
-            <div class="name">${data.listingName}</div>
-            <div class="location">${data.listingLocation}</div>
-          </body>
-        </html>`;
-      res.send(html);
+      // const html =
+      //   `<html>
+      //     <body>
+      //       <div class="name">${data.listingName}</div>
+      //       <div class="location">${data.listingLocation}</div>
+      //     </body>
+      //   </html>`;
+      // res.send(html);
+      res.status(200).send(data);
     });
 });
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });
+
+module.exports = app;

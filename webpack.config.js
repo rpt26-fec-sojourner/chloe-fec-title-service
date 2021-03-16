@@ -9,14 +9,13 @@ module.exports = {
     path: distPath
   },
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.jsx?/,
         include: srcPath,
-        exclude: /node_modules/,
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-react', '@babel/preset-env']
+        query: {
+          presets: ['@babel/react', '@babel/env']
         }
       }
     ]

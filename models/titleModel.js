@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 let titleSchema = mongoose.Schema({
   listingID: Number,
@@ -59,11 +60,12 @@ Title.deleteAllTitles = () => {
 
 Title.findTitleInfo = (id) => {
   return Title.findOne({listingID: id}, (err, title) => {
-    return title;
+    return title || {};
   })
     .catch((err) => {
       console.log('findOne error: ', err);
     });
 };
 
-export default Title;
+// export default Title;
+module.exports.Title = Title;
