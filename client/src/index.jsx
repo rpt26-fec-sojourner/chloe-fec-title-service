@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-const ajaxURL = 'http://localhost:3000';
+const ajaxURL = 'http://localhost:5500';
 import Name from '../src/components/ListingName.jsx';
 import Location from '../src/components/ListingLocation.jsx';
+import Review from '../src/components/ListingReviews.jsx';
+import Button from '../src/components/Buttons.jsx';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -12,10 +14,13 @@ class App extends React.Component {
     this.state = {
       listingID: 1,
       listingName: '',
-      listingLocation: ''
+      listingLocation: '',
+      stars: '',
+      reviews: ''
     };
 
-    this.generateTitle = this.generateTitle.bind(this);
+    this.getTitle = this.getTitle.bind(this);
+    this.getReviews = this.getReviews.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
@@ -23,12 +28,11 @@ class App extends React.Component {
     let splitUrl = window.location.href.split('/');
     let id = splitUrl[splitUrl.length - 1];
 
-    this.generateTitle(id);
+    this.getTitle(id);
   }
 
-  generateTitle (id) {
+  getTitle (id) {
     if (id) {
-      console.log('id: ', id);
       axios.get(`${ajaxURL}/title/${id}`)
         .then((response) => {
           this.setState({
@@ -45,11 +49,16 @@ class App extends React.Component {
     }
   }
 
+  getReviews (id) {
+    //Call Melanie's API endpoint here
+  }
+
   render () {
     return (
       <div>
         <Name name={this.state.listingName}/>
         <Location location={this.state.listingLocation} />
+        <Button />
       </div>
     );
   }
