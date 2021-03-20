@@ -25,8 +25,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    let splitUrl = window.location.href.split('/');
-    let id = splitUrl[splitUrl.length - 1];
+    let id = window.location.href.split('/').pop();
 
     this.getTitle(id);
   }
