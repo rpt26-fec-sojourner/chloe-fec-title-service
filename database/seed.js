@@ -1,7 +1,9 @@
-const dbHelper = require(__dirname + '/../database/config.js');
-const faker = require('faker');
+import dbHelper from '../models/titleModel.js';
+import faker from 'faker';
+import mongoose from 'mongoose';
 
-let spaceAdjectives = [
+let seeder = {};
+seeder.spaceAdjectives = [
   'Astronomical',
   'Celestial',
   'Cosmic',
@@ -16,7 +18,7 @@ let spaceAdjectives = [
   'Stellar'
 ];
 
-let spaceNouns = [
+seeder.spaceNouns = [
   'Rocket',
   'Rocketship',
   'Spaceship',
@@ -28,7 +30,7 @@ let spaceNouns = [
   'Flying Saucer'
 ];
 
-let spaceLocations = [
+seeder.spaceLocations = [
   'Earth',
   'Mars',
   'Jupiter',
@@ -40,27 +42,27 @@ let spaceLocations = [
   'Moon'
 ];
 
-const generateAdj = () => {
-  var adjIndex = Math.floor(Math.random() * spaceAdjectives.length);
+seeder.generateAdj = () => {
+  var adjIndex = Math.floor(Math.random() * seeder.spaceAdjectives.length);
 
-  return spaceAdjectives[adjIndex];
+  return seeder.spaceAdjectives[adjIndex];
 };
 
-const generateNoun = () => {
-  var nounIndex = Math.floor(Math.random() * spaceNouns.length);
+seeder.generateNoun = () => {
+  var nounIndex = Math.floor(Math.random() * seeder.spaceNouns.length);
 
-  return spaceNouns[nounIndex];
+  return seeder.spaceNouns[nounIndex];
 };
 
-const generateTitleName = (usedNames) => {
-  let adj = generateAdj();
-  let noun = generateNoun();
+seeder.generateTitleName = (usedNames) => {
+  let adj = seeder.generateAdj();
+  let noun = seeder.generateNoun();
   let name = `The ${adj} ${noun}`;
 
   if (usedNames.includes(name)) {
     while (usedNames.includes(name)) {
-      adj = generateAdj();
-      noun = generateNoun();
+      adj = seeder.generateAdj();
+      noun = seeder.generateNoun();
       name = `The ${adj} ${noun}`;
     }
   }
@@ -68,43 +70,46 @@ const generateTitleName = (usedNames) => {
   return name;
 };
 
-const generateTitleLocation = () => {
+seeder.generateTitleLocation = () => {
   let city = faker.address.city();
   let state = faker.address.state();
-  let ctryIndex = Math.floor(Math.random() * spaceLocations.length);
-  let country = spaceLocations[ctryIndex];
+  let ctryIndex = Math.floor(Math.random() * seeder.spaceLocations.length);
+  let country = seeder.spaceLocations[ctryIndex];
 
   return `${city}, ${state}, ${country}`;
 };
 
-const seedDatabase = () => {
-  let id = 1;
-  let name = '';
-  let location = '';
-  let usedNames = [];
+seeder.seedDatabase = () => {
+  mongoose.connect('mongodb://localhost/title', {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => {
+      return dbHelper.deleteAllTitles();
+    })
+    .then(() => {
+      let id = 1;
+      let name = '';
+      let location = '';
+      let usedNames = [];
 
-  dbHelper.deleteAllTitles();
+      while (id <= 100) {
+        name = seeder.generateTitleName(usedNames);
+        usedNames.push(name);
+        location = seeder.generateTitleLocation();
 
-  while (id <= 100) {
-    name = generateTitleName(usedNames);
-    usedNames.push(name);
-    location = generateTitleLocation();
+        let newTitle = {
+          listingID: id,
+          listingName: name,
+          listingLocation: location
+        };
 
-    let newTitle = {
-      listingID: id,
-      listingName: name,
-      listingLocation: location
-    };
-
-    dbHelper.createTitle(newTitle);
-    id++;
-  }
+        dbHelper.createTitle(newTitle);
+        id++;
+      }
+    })
+    .catch((err) => {
+      console.log('createTitle error: ', err);
+    });
 };
 
-seedDatabase();
+seeder.seedDatabase();
 
-module.exports.generateAdj = generateAdj;
-module.exports.generateNoun = generateNoun;
-module.exports.generateTitleName = generateTitleName;
-module.exports.generateTitleLocation = generateTitleLocation;
-module.exports.seedDatabase = seedDatabase;
+export default seeder;

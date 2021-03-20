@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import $ from 'jquery';
-const ajaxURL = 'http://localhost:3000';
-import axios from 'axios';
+const ajaxURL = 'http://localhost:5500';
 import Name from '../src/components/ListingName.jsx';
 import Location from '../src/components/ListingLocation.jsx';
+import Review from '../src/components/ListingReviews.jsx';
+import Button from '../src/components/Buttons.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,56 +14,51 @@ class App extends React.Component {
     this.state = {
       listingID: 1,
       listingName: '',
-      listingLocation: ''
+      listingLocation: '',
+      stars: '',
+      reviews: ''
     };
 
-    this.generateTitle = this.generateTitle.bind(this);
+    this.getTitle = this.getTitle.bind(this);
+    this.getReviews = this.getReviews.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount () {
-    // this.generateTitle(this.state.listingID);
+    let id = window.location.href.split('/').pop();
+
+    this.getTitle(id);
   }
 
-  generateTitle (id) {
+  getTitle (id) {
+    if (id) {
+      axios.get(`${ajaxURL}/title/${id}`)
+        .then((response) => {
+          this.setState({
+            listingID: id,
+            listingName: response.data.listingName,
+            listingLocation: response.data.listingLocation
+          });
+        })
+        .catch((err) => {
+          console.log('GET response error: ', err);
+        });
+    } else {
+      this.setState({listingID: 1});
+    }
+  }
 
-    // useEffect(() => {
-    //   fetch('/title/:listing_id')
-    //     .then((res) => {
-    //       if (res.ok) {
-    //         console.log('res: ', res);
-    //         // return res.json();
-    //       }
-    //     })
-    //     .then((data) => {
-    //       console.log('data: ', data);
-    //     });
-    // });
-
-    // $.ajax({
-    //   type: 'GET',
-    //   url: `${ajaxURL}/title/${id}`,
-    //   success: (res) => {
-    //     console.log('Successful GET response: ', res);
-    //     this.setState({listingName: res.listingName, listingLocation: res.listingLocation});
-    //   },
-    //   error: (err) => {
-    //     console.log('GET response error: ', err);
-    //   }
-    // });
-
-    // axios.get()
+  getReviews (id) {
+    //Call Melanie's API endpoint here
   }
 
   render () {
     return (
-      // <Router>
-      //   <Route path="/title/:listing_id">
-      //     <Name />
-      //     <Location />
-      //   </Route>
-      // </Router>
-      <Name name={this.state.listingName}/>
+      <div>
+        <Name name={this.state.listingName}/>
+        <Location location={this.state.listingLocation} />
+        <Button />
+      </div>
     );
   }
 }

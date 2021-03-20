@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 let titleSchema = mongoose.Schema({
   listingID: Number,
   listingName: String,
@@ -9,7 +8,7 @@ let titleSchema = mongoose.Schema({
 
 let Title = mongoose.model('Title', titleSchema);
 
-let createTitle = (newTitle) => {
+Title.createTitle = (newTitle) => {
   Title.findOne({listingName: newTitle.listingName}, (err, doc) => {
     if (err) {
       return err;
@@ -31,7 +30,7 @@ let createTitle = (newTitle) => {
     }
   })
     .catch((err) => {
-      console.err(`Error querying the database (createTitle): ${err}`);
+      console.log(`Error querying the database (createTitle): ${err}`);
     });
 };
 
@@ -44,11 +43,11 @@ let findAllTitles = () => {
     }
   })
     .catch((err) => {
-      console.err(`Error querying the database (findAllTitles): ${err}`);
+      console.log(`Error querying the database (findAllTitles): ${err}`);
     });
 };
 
-let deleteAllTitles = () => {
+Title.deleteAllTitles = () => {
   Title.deleteMany({}, (err) => {
     if (err) {
       return err;
@@ -58,15 +57,13 @@ let deleteAllTitles = () => {
   });
 };
 
-let findTitleInfo = (id) => {
+Title.findTitleInfo = (id) => {
   return Title.findOne({listingID: id}, (err, title) => {
-    return title;
-  });
+    return title || {};
+  })
+    .catch((err) => {
+      console.log('findOne error: ', err);
+    });
 };
 
-module.exports.Title = Title;
-module.exports.createTitle = createTitle;
-module.exports.findAllTitles = findAllTitles;
-module.exports.deleteAllTitles = deleteAllTitles;
-module.exports.findTitleInfo = findTitleInfo;
-
+module.exports = Title;
