@@ -13,6 +13,11 @@ app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost/title', {useNewUrlParser: true, useUnifiedTopology: true});
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.get('/title/:listing_id', (req, res) => {
   let listingID = req.params.listing_id;
   model.findTitleInfo(listingID)
@@ -25,6 +30,7 @@ app.get('/title/:listing_id', (req, res) => {
 });
 
 app.get('/:listing_id', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   res.sendFile(path.join(distPath, 'index.html'));
 });
 
