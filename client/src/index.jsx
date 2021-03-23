@@ -51,7 +51,6 @@ class App extends React.Component {
   getReviews (id) {
     axios.get(`${reviewURL}/average/${id}`)
       .then((response) => {
-        console.log('res: ', response);
         this.setState({
           stars: response.data.stars,
           reviews: response.data.total
@@ -68,9 +67,11 @@ class App extends React.Component {
   }
 
   render () {
+    console.log('this.state: ', this.state);
     return (
       <div>
         <Name name={this.state.listingName}/>
+        <Review stars={this.state.stars} reviews={this.state.reviews}/>
         <Location location={this.state.listingLocation} />
         <Button />
       </div>
@@ -78,4 +79,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('title'));
