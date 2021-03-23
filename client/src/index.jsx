@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-const ajaxURL = 'http://localhost:5500';
+const titleURL = 'http://localhost:5500';
+const reviewURL = 'http://localhost:1969';
 import Name from '../src/components/ListingName.jsx';
 import Location from '../src/components/ListingLocation.jsx';
 import Review from '../src/components/ListingReviews.jsx';
@@ -25,14 +26,15 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    let id = window.location.href.split('/').pop();
+    let id = window.location.href.split('/').pop() || 1;
 
     this.getTitle(id);
+    this.getReviews(id);
   }
 
   getTitle (id) {
     if (id) {
-      axios.get(`${ajaxURL}/title/${id}`)
+      axios.get(`${titleURL}/title/${id}`)
         .then((response) => {
           this.setState({
             listingID: id,
@@ -43,19 +45,32 @@ class App extends React.Component {
         .catch((err) => {
           console.log('GET response error: ', err);
         });
-    } else {
-      this.setState({listingID: 1});
     }
   }
 
   getReviews (id) {
-    //Call Melanie's API endpoint here
+    axios.get(`${reviewURL}/average/${id}`)
+      .then((response) => {
+        this.setState({
+          stars: response.data.stars,
+          reviews: response.data.total
+        });
+      })
+      .catch((err) => {
+        console.log('getReviews error: ', err);
+
+        this.setState({
+          stars: 0,
+          reviews: 0
+        });
+      });
   }
 
   render () {
     return (
       <div>
         <Name name={this.state.listingName}/>
+        <Review stars={this.state.stars} reviews={this.state.reviews}/>
         <Location location={this.state.listingLocation} />
         <Button />
       </div>
@@ -63,4 +78,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('title'));
