@@ -1,12 +1,14 @@
 import React from 'react';
 
-const Review = (props) => {
+const ReviewsLocation = (props) => {
+  const display = props.superhost ? `★ ${props.stars} (${props.reviews}) · Superhost · ${props.location}` : `★ ${props.stars} (${props.reviews}) · ${props.location}`;
+
   return (
     <div>
-      <div>{`[insert star icon here] ${props.stars} (${props.reviews} reviews)`}</div>
-      <div></div>
+      <div>{display} </div>
     </div>
   );
 };
 
-export default Review;
+export default ReviewsLocation;
+
