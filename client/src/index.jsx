@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 const titleURL = 'http://localhost:5500';
 const reviewURL = 'http://localhost:1969';
 import Name from '../src/components/ListingName.jsx';
-import Location from '../src/components/ListingLocation.jsx';
-import Review from '../src/components/ListingReviews.jsx';
+import ReviewsLocation from '../src/components/ListingReviews.jsx';
 import Button from '../src/components/Buttons.jsx';
 import axios from 'axios';
 
@@ -70,8 +69,7 @@ class App extends React.Component {
     return (
       <div>
         <Name name={this.state.listingName}/>
-        <Review stars={this.state.stars} reviews={this.state.reviews}/>
-        <Location location={this.state.listingLocation} />
+        <ReviewsLocation stars={this.state.stars} reviews={this.state.reviews}location={this.state.listingLocation} />
         <Button />
       </div>
     );

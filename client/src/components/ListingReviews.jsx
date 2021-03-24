@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Review = (props) => {
+const ReviewsLocation = (props) => {
   return (
     <div>
-      <div>{`[insert star icon here] ${props.stars} (${props.reviews} reviews)`}</div>
-      <div></div>
+      <div>{`★ ${props.stars} (${props.reviews}) · ${props.location}`} </div>
     </div>
   );
 };
 
-export default Review;
+export default ReviewsLocation;
+
