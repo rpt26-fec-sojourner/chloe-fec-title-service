@@ -16,7 +16,8 @@ class App extends React.Component {
       listingName: '',
       listingLocation: '',
       stars: '',
-      reviews: ''
+      reviews: '',
+      superhost: false
     };
 
     this.getTitle = this.getTitle.bind(this);
@@ -38,7 +39,8 @@ class App extends React.Component {
           this.setState({
             listingID: id,
             listingName: response.data.listingName,
-            listingLocation: response.data.listingLocation
+            listingLocation: response.data.listingLocation,
+            superhost: (id % 2 === 0 ? true : false)
           });
         })
         .catch((err) => {
@@ -69,7 +71,7 @@ class App extends React.Component {
     return (
       <div>
         <Name name={this.state.listingName}/>
-        <ReviewsLocation stars={this.state.stars} reviews={this.state.reviews}location={this.state.listingLocation} />
+        <ReviewsLocation stars={this.state.stars} reviews={this.state.reviews} superhost={this.state.superhost} location={this.state.listingLocation} />
         <Button />
       </div>
     );
