@@ -3,9 +3,29 @@ import ReactDOM from 'react-dom';
 const titleURL = 'http://localhost:5500';
 const reviewURL = 'http://localhost:1969';
 import Name from '../src/components/ListingName.jsx';
-import ReviewsLocation from '../src/components/ListingReviews.jsx';
-import Button from '../src/components/Buttons.jsx';
+import Reviews from '../src/components/ListingReviews.jsx';
+import Location from '../src/components/ListingLocation.jsx';
+import Superhost from '../src/components/Superhost.jsx';
+import ShareButton from '../src/components/ShareButton.jsx';
+import SaveButton from '../src/components/SaveButton.jsx';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const StyledName = styled.h1`
+  font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
+  font-style: normal;
+  font-size: 26px;
+  font-weight: 600;
+  line-height:30px;
+  color: #222222;
+`;
+
+
+const StyledButtons = styled.button`
+  border: none;
+  background-color: white;
+  float: right;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -70,9 +90,20 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Name name={this.state.listingName}/>
-        <ReviewsLocation stars={this.state.stars} reviews={this.state.reviews} superhost={this.state.superhost} location={this.state.listingLocation} />
-        <Button />
+        <StyledName>
+          <Name name={this.state.listingName}></Name>
+        </StyledName>
+        <>
+          <Reviews stars={this.state.stars} reviews={this.state.reviews} ></Reviews>
+          <Superhost superhost={this.state.superhost}></Superhost>
+          <Location location={this.state.listingLocation}></Location>
+        </>
+        <StyledButtons>
+          <SaveButton></SaveButton>
+        </StyledButtons>
+        <StyledButtons>
+          <ShareButton></ShareButton>
+        </StyledButtons>
       </div>
     );
   }
