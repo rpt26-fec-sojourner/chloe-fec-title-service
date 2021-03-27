@@ -1,6 +1,6 @@
-import dbHelper from '../models/titleModel.js';
-import faker from 'faker';
-import mongoose from 'mongoose';
+const dbHelper = require('../models/titleModel.js');
+const faker = require('faker');
+const mongoose = require('mongoose');
 
 let seeder = {};
 seeder.spaceAdjectives = [
@@ -112,4 +112,4 @@ seeder.seedDatabase = () => {
 
 seeder.seedDatabase();
 
-export default seeder;
+module.exports.seeder = seeder;

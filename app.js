@@ -11,7 +11,7 @@ app.use(express.static(distPath));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/title', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1:27017/title', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
