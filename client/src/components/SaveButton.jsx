@@ -1,7 +1,16 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as solidFaHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regFaHeart } from '@fortawesome/free-regular-svg-icons';
 import styled from 'styled-components';
+
+const StyledHeart = styled.span`
+  color: ${(props) => {
+    if (props.saved) {
+      return '#ff385c';
+    }
+  }};
+`;
 
 const StyledSave = styled.span`
   font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
@@ -14,9 +23,19 @@ const StyledSave = styled.span`
 `;
 
 const SaveButton = (props) => {
+  let heartIcon = regFaHeart;
+
+  if (props.saved) {
+    heartIcon = solidFaHeart;
+  }
+
+  console.log('state: ', props.saved);
+
   return (
     <span>
-      <FontAwesomeIcon icon={faHeart} />
+      <StyledHeart saved={props.saved} onClick={() => props.click()}>
+        <FontAwesomeIcon icon={heartIcon} />
+      </StyledHeart>
       <span>  </span>
       <StyledSave>
         Save

@@ -23,8 +23,9 @@ const StyledName = styled.h1`
 
 const StyledButtons = styled.button`
   border: none;
-  background-color: white;
+  background-color: #FFFFFF;
   float: right;
+  color: #000000;
 `;
 
 class App extends React.Component {
@@ -37,11 +38,13 @@ class App extends React.Component {
       listingLocation: '',
       stars: '',
       reviews: '',
-      superhost: false
+      superhost: false,
+      saved: false
     };
 
     this.getTitle = this.getTitle.bind(this);
     this.getReviews = this.getReviews.bind(this);
+    this.clickSave = this.clickSave.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
@@ -87,6 +90,13 @@ class App extends React.Component {
       });
   }
 
+  clickSave(e) {
+    e.stopPropogation();
+    const currentSave = this.state.saved;
+    this.setState({saved: !currentSave});
+    console.log('this: ', this.state.saved);
+  }
+
   render () {
     return (
       <div>
@@ -99,7 +109,7 @@ class App extends React.Component {
           <Location location={this.state.listingLocation}></Location>
         </>
         <StyledButtons>
-          <SaveButton></SaveButton>
+          <SaveButton saved={this.state.saved} click={this.clickSave}></SaveButton>
         </StyledButtons>
         <StyledButtons>
           <ShareButton></ShareButton>
