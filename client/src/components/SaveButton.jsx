@@ -29,18 +29,18 @@ const SaveButton = (props) => {
     heartIcon = solidFaHeart;
   }
 
-  console.log('state: ', props.saved);
-
   return (
-    <span>
-      <StyledHeart saved={props.saved} onClick={() => props.click()}>
-        <FontAwesomeIcon icon={heartIcon} />
-      </StyledHeart>
-      <span>  </span>
-      <StyledSave>
-        Save
-      </StyledSave>
-    </span>
+    <div>
+      <span>
+        <StyledHeart >
+          <FontAwesomeIcon icon={heartIcon} />
+        </StyledHeart>
+        <span>  </span>
+        <StyledSave >
+          Save
+        </StyledSave>
+      </span>
+    </div>
   );
 };
 
