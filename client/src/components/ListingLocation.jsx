@@ -1,24 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledSuperhost = styled.span`
+const StyledLocation = styled.span`
   font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
   font-style: normal;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 20px;
   color: #717171;
+  text-decoration: underline;
 `;
 
-const Superhost = (props) => {
-  const display = props.superhost ? '  · Superhost ·  ' : '·  ';
-
+const Location = (props) => {
   return (
-    <StyledSuperhost>
-      {display}
-    </StyledSuperhost>
+    <StyledLocation>
+      {props.location}
+    </StyledLocation>
   );
 };
 
-export default Superhost;
+export default Location;
 
