@@ -1,13 +1,12 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 const titleURL = 'http://localhost:5500';
 const reviewURL = 'http://localhost:1969';
-import Name from '../src/components/ListingName.jsx';
-import Reviews from '../src/components/ListingReviews.jsx';
-import Location from '../src/components/ListingLocation.jsx';
-import Superhost from '../src/components/Superhost.jsx';
-import ShareButton from '../src/components/ShareButton.jsx';
-import SaveButton from '../src/components/SaveButton.jsx';
+import Name from './ListingName.jsx';
+import Reviews from './ListingReviews.jsx';
+import Location from './ListingLocation.jsx';
+import Superhost from './Superhost.jsx';
+import ShareButton from './ShareButton.jsx';
+import SaveButton from './SaveButton.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -44,7 +43,6 @@ class App extends React.Component {
 
     this.getTitle = this.getTitle.bind(this);
     this.getReviews = this.getReviews.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount () {
@@ -92,7 +90,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <StyledName onClick={() => console.log('nameclick')}>
+        <StyledName >
           <Name name={this.state.listingName}></Name>
         </StyledName>
         <>
