@@ -1,0 +1,12 @@
+## Commands to install Docker on virtual machine (Ubuntu on EC2 instance)
+
+## Install Docker
+sudo apt-get install
+## Start Docker
+sudo systemctl start docker
+## Check Docker Status
+sudo systemctl status docker
+## Add ubuntu user name to the docker group so you can execute Docker commands without using sudo (must log out of VM and back in to see changes)
+sudo usermod -a -G docker ubuntu
+## Verify that ubuntu user can run docker commands without using Sudo
+docker info

@@ -4,7 +4,7 @@ const distPath = path.join(__dirname, '/client/dist');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  watch: true,
+  //watch: true,
   entry: `${srcPath}/index.jsx`,
   output: {
     filename: 'bundle.js',
