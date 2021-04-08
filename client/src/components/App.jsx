@@ -1,6 +1,12 @@
 import React from 'react';
-const titleURL = 'http://localhost:5500';
-const reviewURL = 'http://localhost:1969';
+const currUrl = window.location.href;
+const arr = currUrl.split(':');
+const rootURL = `${arr[0]}:${arr[1]}`;
+const titlePort = 5500;
+const reviewPort = 1969;
+
+const titleURL = `${rootURL}:${titlePort}`;
+const reviewURL = `${rootURL}:${reviewPort}`;
 import Name from './ListingName.jsx';
 import Reviews from './ListingReviews.jsx';
 import Location from './ListingLocation.jsx';
