@@ -12,4 +12,6 @@ COPY . /airbnb-title
 
 RUN npm run build
 
+EXPOSE 5500
+
 CMD ["node", "server/index.js"]

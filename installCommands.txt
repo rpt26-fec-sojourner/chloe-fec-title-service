@@ -10,3 +10,9 @@ sudo systemctl status docker
 sudo usermod -a -G docker ubuntu
 ## Verify that ubuntu user can run docker commands without using Sudo
 docker info
+
+## Build from Dockerfile
+docker build --tag [name you want to give the tag] .
+
+## Start running docker container
+docker run -p [local port to map to]:[port on docker container - defined by ENV in Dockerfile] --name [what you want to name the container] -d [image repo name]
