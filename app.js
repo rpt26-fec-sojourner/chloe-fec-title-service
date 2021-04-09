@@ -25,7 +25,6 @@ app.use((req, res, next) => {
 });
 
 app.get('/title/:listing_id', (req, res) => {
-  console.log('hi');
   let listingID = req.params.listing_id;
   model.findTitleInfo(listingID)
     .then((data) => {
