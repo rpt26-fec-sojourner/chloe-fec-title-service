@@ -81,7 +81,7 @@ seeder.generateTitleLocation = () => {
 
 seeder.seedDatabase = () => {
   // mongoose.connect('mongodb://127.0.0.1:27017/title', {useNewUrlParser: true, useUnifiedTopology: true})
-  mongoose.connect('mongodb://18.222.126.147:27017/title', {useNewUrlParser: true, useUnifiedTopology: true})
+  mongoose.connect('mongodb://admin:root@18.222.126.147:27017/title', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
       return dbHelper.deleteAllTitles();
     })
