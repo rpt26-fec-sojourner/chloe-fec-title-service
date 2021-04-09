@@ -1,0 +1,34 @@
+## Common Docker commands
+
+## Install Docker on ubuntu
+sudo apt-get install
+## Start Docker
+sudo systemctl start docker
+## Check Docker Status
+sudo systemctl status docker
+## Add ubuntu user name to the docker group so you can execute Docker commands without using sudo (must log out of VM and back in to see changes)
+sudo usermod -a -G docker ubuntu
+## Verify that ubuntu user can run docker commands without using Sudo
+docker info
+## Once ubuntu user is added to docker group, can use docker commands with 'sudo' e.g. docker images, docker ps, docker ps -a, etc.
+
+## Build from Dockerfile from root directory
+docker build --tag [name you want to give the tag] .
+
+## Start running docker container
+docker run -p [local port to map to]:[port on docker container - defined by ENV in Dockerfile] --name [what you want to name the container] -d [image's repo name]
+
+## Stop running docker container
+docker stop [name of container]
+
+## Remove container (must stop container first if running)
+docker rm [name of container]
+
+## Remove image (if any containers are running from the image, must stop and remove those containers first)
+docker rmi [name of image]
+
+## Push docker image to DockerHub (first step is to create a repo in DockerHub)
+    ## First you need to tag your image with your repo name
+    docker tag [image name] [tag name (should match name of your repo)]
+    ## Now you can push to DockerHub
+    docker push [tag name]

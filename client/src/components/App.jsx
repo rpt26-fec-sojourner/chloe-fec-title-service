@@ -1,12 +1,11 @@
 import React from 'react';
-const currUrl = window.location.href;
-const arr = currUrl.split(':');
+const arr = window.location.href.split(':');
 const rootURL = `${arr[0]}:${arr[1]}`;
 const titlePort = 5500;
 const reviewPort = 1969;
 
-const titleURL = `${rootURL}:${titlePort}`;
-const reviewURL = `${rootURL}:${reviewPort}`;
+const titleURL = rootURL === 'http://localhost' ? `http://localhost:${titlePort}` : `${rootURL}:${titlePort}`;
+const reviewURL = rootURL === 'http://localhost' ? `https://localhost:${reviewPort}` : `${rootURL}:${reviewPort}`;
 import Name from './ListingName.jsx';
 import Reviews from './ListingReviews.jsx';
 import Location from './ListingLocation.jsx';
@@ -24,7 +23,6 @@ const StyledName = styled.h1`
   line-height:30px;
   color: #222222;
 `;
-
 
 const StyledButtons = styled.button`
   border: none;
