@@ -60,6 +60,7 @@ class App extends React.Component {
     if (id) {
       axios.get(`${titleURL}/title/${id}`)
         .then((response) => {
+          console.log('res: ', response);
           this.setState({
             listingID: id,
             listingName: response.data.listingName,

@@ -1,6 +1,10 @@
 const dbHelper = require('../models/titleModel.js');
 const faker = require('faker');
 const mongoose = require('mongoose');
+const dbUser = process.env.DB_USERNAME;
+const dbPW = process.env.DB_PASSWORD;
+const dbHost = process.env.DB_HOST || '127.0.0.1';
+const dbPort = process.env.DB_PORT || '27017';
 
 let seeder = {};
 seeder.spaceAdjectives = [
@@ -81,7 +85,7 @@ seeder.generateTitleLocation = () => {
 
 seeder.seedDatabase = () => {
   // mongoose.connect('mongodb://127.0.0.1:27017/title', {useNewUrlParser: true, useUnifiedTopology: true})
-  mongoose.connect('mongodb://admin:root@18.222.126.147:27017/title', {useNewUrlParser: true, useUnifiedTopology: true})
+  mongoose.connect(`mongodb://${dbUser}:${dbPW}@${dbHost}:${dbPort}/title`, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
       return dbHelper.deleteAllTitles();
     })

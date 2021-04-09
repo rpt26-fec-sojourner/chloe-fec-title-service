@@ -1,9 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const model = require('./models/titleModel.js');
 const mongoose = require('mongoose');
 const distPath = path.join(__dirname, 'client/dist');
+const dbUser = process.env.DB_USERNAME;
+const dbPW = process.env.DB_PASSWORD;
+const dbHost = process.env.DB_HOST || '127.0.0.1';
+const dbPort = process.env.DB_PORT || '27017';
 
 const app = express();
 
@@ -12,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // mongoose.connect('mongodb://127.0.0.1:27017/title', {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect('mongodb://admin:root@18.222.126.147:27017/title', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(`mongodb://${dbUser}:${dbPW}@${dbHost}:${dbPort}/title`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -20,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/title/:listing_id', (req, res) => {
+  console.log('hi');
   let listingID = req.params.listing_id;
   model.findTitleInfo(listingID)
     .then((data) => {

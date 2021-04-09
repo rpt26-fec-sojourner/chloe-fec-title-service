@@ -30,3 +30,4 @@ config.js
 # Keyfiles
 *.pem
 login.sh
+.env
