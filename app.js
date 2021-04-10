@@ -16,7 +16,7 @@ app.use(express.static(distPath));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/title', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/title', {useNewUrlParser: true, useUnifiedTopology: true});
 // mongoose.connect(`mongodb://${dbUser}:${dbPW}@${dbHost}:${dbPort}/title`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use((req, res, next) => {
