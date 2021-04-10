@@ -4,8 +4,11 @@ const rootURL = `${arr[0]}:${arr[1]}`;
 const titlePort = 5500;
 const reviewPort = 1969;
 
-const titleURL = rootURL === 'http://localhost' ? `http://localhost:${titlePort}` : `${rootURL}:${titlePort}`;
-const reviewURL = rootURL === 'http://localhost' ? `https://localhost:${reviewPort}` : `${rootURL}:${reviewPort}`;
+// const titleURL = rootURL === 'http://localhost' ? `http://localhost:${titlePort}` : `${rootURL}:${titlePort}`;
+// const reviewURL = rootURL === 'http://localhost' ? `https://localhost:${reviewPort}` : `http://3.21.252.90:${reviewPort}`;
+const titleURL = 'http://13.59.196.208:5500';
+const reviewURL = 'http://3.21.252.90:1969';
+
 import Name from './ListingName.jsx';
 import Reviews from './ListingReviews.jsx';
 import Location from './ListingLocation.jsx';
