@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const mongoose = require('mongoose');
 
 let titleSchema = mongoose.Schema({
@@ -10,7 +10,8 @@ let titleSchema = mongoose.Schema({
 let Title = mongoose.model('Title', titleSchema);
 
 Title.createTitle = (newTitle) => {
-  Title.findOne({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, listingName: newTitle.listingName}, (err, doc) => {
+  // Title.findOne({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, listingName: newTitle.listingName}, (err, doc) => {
+  Title.findOne({listingName: newTitle.listingName}, (err, doc) => {
     if (err) {
       return err;
     } else if (!doc) {
@@ -36,7 +37,8 @@ Title.createTitle = (newTitle) => {
 };
 
 let findAllTitles = () => {
-  Title.find({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD}, (err, doc) => {
+  //Title.find({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD}, (err, doc) => {
+  Title.find({}, (err, doc) => {
     if (err) {
       return console.error(err);
     } else {
@@ -49,7 +51,8 @@ let findAllTitles = () => {
 };
 
 Title.deleteAllTitles = () => {
-  Title.deleteMany({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD}, (err) => {
+  //Title.deleteMany({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD}, (err) => {
+  Title.deleteMany({}, (err) => {
     if (err) {
       return err;
     } else {
@@ -59,8 +62,8 @@ Title.deleteAllTitles = () => {
 };
 
 Title.findTitleInfo = (id) => {
-  return Title.findOne({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, listingID: id}, (err, title) => {
-  // return Title.findOne({listingID: id}, (err, title) => {
+  //return Title.findOne({username: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, listingID: id}, (err, title) => {
+  return Title.findOne({listingID: id}, (err, title) => {
     return title || {};
   })
     .catch((err) => {
