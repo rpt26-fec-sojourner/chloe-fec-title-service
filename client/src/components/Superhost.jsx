@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import superhostBadge from '../assets/AirBnB_Superhost_icon.png';
+import superhostBadge from '../assets/AirBnB_Superhost_Icon.png';
 
 const StyledSuperhost = styled.span`
   font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
