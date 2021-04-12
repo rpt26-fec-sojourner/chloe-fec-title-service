@@ -43,7 +43,7 @@ const Reviews = (props) => {
       </StyledStarAvg>
       <StyledReviews>
         ({props.reviews})
-        <span>  </span>
+        <span>    ·   </span>
       </StyledReviews>
     </span>
   );

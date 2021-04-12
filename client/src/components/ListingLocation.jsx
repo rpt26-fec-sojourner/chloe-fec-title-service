@@ -13,9 +13,12 @@ const StyledLocation = styled.span`
 
 const Location = (props) => {
   return (
-    <StyledLocation>
-      {props.location}
-    </StyledLocation>
+    <span>
+      <span>    </span>
+      <StyledLocation>
+        {props.location}
+      </StyledLocation>
+    </span>
   );
 };
 

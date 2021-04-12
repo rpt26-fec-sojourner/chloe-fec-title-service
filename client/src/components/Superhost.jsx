@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import superhostBadge from '../assets/AirBnB_Superhost_icon.png';
 
 const StyledSuperhost = styled.span`
   font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
@@ -8,15 +9,23 @@ const StyledSuperhost = styled.span`
   font-weight: 400;
   line-height: 20px;
   color: #717171;
+  display: inline-block;
 `;
 
 const Superhost = (props) => {
-  const display = props.superhost ? '  · Superhost ·  ' : '·  ';
+  const superhostDisplay = props.superhost ?
+    <StyledSuperhost>
+      <img src={superhostBadge} />
+      <span>    Superhost   ·</span>
+    </StyledSuperhost> :
+    <StyledSuperhost>
+    </StyledSuperhost>;
 
   return (
-    <StyledSuperhost>
-      {display}
-    </StyledSuperhost>
+    <span>
+      <span>    </span>
+      {superhostDisplay}
+    </span>
   );
 };
 

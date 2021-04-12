@@ -4,8 +4,6 @@ const rootURL = `${arr[0]}:${arr[1]}`;
 const titlePort = 5500;
 const reviewPort = 1969;
 
-// const titleURL = rootURL === 'http://localhost' ? `http://localhost:${titlePort}` : `${rootURL}:${titlePort}`;
-// const reviewURL = rootURL === 'http://localhost' ? `https://localhost:${reviewPort}` : `http://3.21.252.90:${reviewPort}`;
 const titleURL = 'http://13.59.196.208:5500';
 const reviewURL = 'http://3.21.252.90:1969';
 
@@ -63,7 +61,6 @@ class App extends React.Component {
     if (id) {
       axios.get(`${titleURL}/title/${id}`)
         .then((response) => {
-          console.log('res: ', response);
           this.setState({
             listingID: id,
             listingName: response.data.listingName,
