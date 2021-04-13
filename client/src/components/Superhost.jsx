@@ -15,7 +15,7 @@ const StyledSuperhost = styled.span`
 const Superhost = (props) => {
   const superhostDisplay = props.superhost ?
     <StyledSuperhost>
-      <img src={superhostBadge} />
+      <img src={superhostBadge} alt="Superhost Badge"/>
       <span>    Superhost   ·</span>
     </StyledSuperhost> :
     <StyledSuperhost>
