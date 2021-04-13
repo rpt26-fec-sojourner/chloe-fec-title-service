@@ -83,8 +83,6 @@ class App extends React.Component {
         });
       })
       .catch((err) => {
-        console.log('getReviews error: ', err);
-
         this.setState({
           stars: 0,
           reviews: 0
