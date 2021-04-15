@@ -32,6 +32,18 @@ const StyledButtons = styled.button`
   color: #000000;
 `;
 
+const Container = styled.div`
+  padding-top: 24px;
+  padding-left: 40px;
+  padding-right: 40px;
+`;
+
+const Subcontainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4px;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -92,7 +104,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <Container>
         <StyledName >
           <Name name={this.state.listingName}></Name>
         </StyledName>
@@ -107,7 +119,7 @@ class App extends React.Component {
         <StyledButtons>
           <ShareButton></ShareButton>
         </StyledButtons>
-      </div>
+      </Container>
     );
   }
 }

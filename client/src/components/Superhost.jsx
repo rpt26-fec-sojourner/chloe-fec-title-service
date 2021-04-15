@@ -12,20 +12,29 @@ const StyledSuperhost = styled.span`
   display: inline-block;
 `;
 
+const Container = styled.span`
+  -webkit-box-align: center;
+  min-width: 0px;
+  margin-top: 8px;
+  align-items: center;
+  display: inline-flex;
+`;
+
 const Superhost = (props) => {
   const superhostDisplay = props.superhost ?
     <StyledSuperhost>
+      &nbsp;
       <img src={superhostBadge} alt="Superhost Badge"/>
-      <span>    Superhost   ·</span>
+      <span>&nbsp;Superhost&nbsp;·</span>
     </StyledSuperhost> :
     <StyledSuperhost>
+      <span>&nbsp;</span>
     </StyledSuperhost>;
 
   return (
-    <span>
-      <span>    </span>
+    <Container>
       {superhostDisplay}
-    </span>
+    </Container>
   );
 };
 

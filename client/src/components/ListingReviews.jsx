@@ -21,31 +21,36 @@ const StyledStarAvg = styled.span`
 `;
 
 const StyledReviews = styled.span`
-  font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
-  font-style: normal;
-  font-size: 14px;
+  color: rgb(113, 113, 113);
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   font-weight: 400;
+  font-size: 14px;
   line-height: 20px;
-  color: #717171;
+  padding-left: 4px;
 `;
 
+const Container = styled.span`
+  -webkit-box-align: center;
+  min-width: 0px;
+  margin-top: 8px;
+  align-items: center;
+  display: inline-flex;
+`;
 
 const Reviews = (props) => {
   return (
-    <span>
+    <Container>
       <StyledStar>
         <FontAwesomeIcon icon={faStar}/>
-        <span> </span>
+        &nbsp;
       </StyledStar>
       <StyledStarAvg>
         {props.stars}
-        <span>  </span>
       </StyledStarAvg>
       <StyledReviews>
-        ({props.reviews})
-        <span>    ·   </span>
+        ({props.reviews})&nbsp;·
       </StyledReviews>
-    </span>
+    </Container>
   );
 };
 
