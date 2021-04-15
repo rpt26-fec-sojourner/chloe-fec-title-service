@@ -111,7 +111,9 @@ class App extends React.Component {
         });
       })
       .catch((err) => {
-        console.log('Error getting data from Host API: ', err);
+        this.setState({
+          superhost: true
+        });
       });
   }
 
