@@ -11,14 +11,22 @@ const StyledLocation = styled.span`
   text-decoration: underline;
 `;
 
+const Container = styled.span`
+  -webkit-box-align: center;
+  min-width: 0px;
+  margin-top: 8px;
+  align-items: center;
+  display: inline-flex;
+`;
+
 const Location = (props) => {
   return (
-    <span>
-      <span>    </span>
+    <Container>
+      &nbsp;
       <StyledLocation>
         {props.location}
       </StyledLocation>
-    </span>
+    </Container>
   );
 };
 

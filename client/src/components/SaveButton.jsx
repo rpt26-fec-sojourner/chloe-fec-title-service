@@ -20,6 +20,11 @@ const StyledSave = styled.span`
   line-height: 18px;
   color: #000000;
   text-decoration: underline;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  padding: 8px;
+  background: transparent;
 `;
 
 const SaveButton = (props) => {
