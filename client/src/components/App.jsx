@@ -6,6 +6,7 @@ const reviewPort = 1969;
 
 const titleURL = 'http://13.59.196.208:5500';
 const reviewURL = 'http://3.21.252.90:1969';
+const hostURL = 'http://18.220.77.80:2222';
 
 import Name from './ListingName.jsx';
 import Reviews from './ListingReviews.jsx';
@@ -66,6 +67,7 @@ class App extends React.Component {
     let id = window.location.href.split('/').pop() || 1;
 
     this.getTitle(id);
+    this.getHostInfo(id);
     this.getReviews(id);
   }
 
@@ -76,8 +78,7 @@ class App extends React.Component {
           this.setState({
             listingID: id,
             listingName: response.data.listingName,
-            listingLocation: response.data.listingLocation,
-            superhost: (id % 2 === 0 ? true : false)
+            listingLocation: response.data.listingLocation
           });
         })
         .catch((err) => {
@@ -98,6 +99,20 @@ class App extends React.Component {
         this.setState({
           stars: 0,
           reviews: 0
+        });
+      });
+  }
+
+  getHostInfo(id) {
+    axios.get(`${hostURL}/host/${id}`)
+      .then((response) => {
+        this.setState({
+          superhost: response.data.superhostFlag
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          superhost: true
         });
       });
   }
