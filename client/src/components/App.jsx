@@ -6,7 +6,7 @@ const reviewPort = 1969;
 
 const titleURL = 'http://13.59.196.208:5500';
 const reviewURL = 'http://3.21.252.90:1969';
-const hostURL = 'http://localhost:2222';
+const hostURL = 'http://18.220.77.80:2222';
 
 import Name from './ListingName.jsx';
 import Reviews from './ListingReviews.jsx';
